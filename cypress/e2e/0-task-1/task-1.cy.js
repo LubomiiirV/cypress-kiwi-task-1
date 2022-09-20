@@ -46,9 +46,11 @@ Cypress._.times(10, () => {
     });
 
     it("Check if its sorted from lowest price", () => {
-      cy.wait(500);
       cy.get(
-        '[data-test="1e03125b4b6b0000bebe42e1_0-125b1e034b7c000065296264_0"] > .ResultCardstyled__ResultCardActions-sc-vsw8q3-5 > .ResultCardstyled__ResultCardActionsPriceMeta-sc-vsw8q3-6 > .ResultCardstyled__ResultCardActionsPrice-sc-vsw8q3-7 > [data-test="ResultCardPrice"] > .length-4'
+        '[data-test="1e03125b4b6b0000bebe42e1_0-125b1e034b7c000065296264_0"] > .ResultCardstyled__ResultCardActions-sc-vsw8q3-5 > .ResultCardstyled__ResultCardActionsPriceMeta-sc-vsw8q3-6 > .ResultCardstyled__ResultCardActionsPrice-sc-vsw8q3-7 > [data-test="ResultCardPrice"] > .length-4',
+        {
+          timeout: 5000,
+        }
       ).then(($prices) => {
         const innerText = (el) => el.innerText;
         const firstWord = (text) => text.split(" ")[0];

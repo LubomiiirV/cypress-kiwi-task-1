@@ -1,5 +1,8 @@
 {
   "dependencies": {
     "cypress": "^10.8.0"
+  },
+  "devDependencies": {
+    "cypress-fail-fast": "^5.0.1"
   }
 }
