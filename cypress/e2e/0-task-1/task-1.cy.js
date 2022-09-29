@@ -1,4 +1,4 @@
-Cypress._.times(10, () => {
+Cypress._.times(1, () => {
   describe("Test Kiwi web site", () => {
     it("Visit kiwi.com and accept cookies", () => {
       cy.once("uncaught:exception", () => false);
@@ -16,7 +16,7 @@ Cypress._.times(10, () => {
       cy.get(
         '[data-test="PlacePickerInput-destination"] > [data-test="SearchField-input"]'
       ).type("Dublin");
-      cy.wait(3000);
+      //cy.wait(3000);
       cy.get(
         '[data-test="PlacePickerRow-city"] > .Stack__StyledStack-sc-oaff2v-0'
       ).click({ multiple: true });
@@ -35,8 +35,8 @@ Cypress._.times(10, () => {
     });
 
     it("Check if Booking option is enabled", () => {
-      cy.get(":checkbox").uncheck().should("be.checked");
-      cy.wait(3000);
+      cy.get(".Checkbox__LabelText-sc-1xqef2c-3").click({ multiple: true });
+      cy.get(":checkbox").should("be.checked");
     });
 
     it("Click search", () => {
