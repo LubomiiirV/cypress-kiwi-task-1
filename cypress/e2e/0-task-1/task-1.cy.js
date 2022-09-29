@@ -7,9 +7,9 @@ Cypress._.times(10, () => {
       ).click();
     });
 
-    // it("Check origin", () => {
-    //   cy.get('[data-test="PlacePickerInputPlace"]').contains("Bratislava");
-    // });
+    it("Check origin", () => {
+      cy.get('[data-test="PlacePickerInputPlace"]').contains("Bratislava");
+    });
 
     it("Add destination", () => {
       cy.get(
