@@ -1,12 +1,11 @@
 Cypress._.times(10, () => {
   describe("Test Kiwi web site", () => {
     it("Visit kiwi.com and accept cookies", () => {
-      //cy.once("uncaught:exception", () => false);
+      cy.once("uncaught:exception", () => false);
       cy.visit("");
       cy.get(
         '[data-test="ModalCloseButton"] > .ButtonPrimitiveContent__StyledButtonPrimitiveContent-sc-1r81o9a-0 > .ButtonPrimitiveIconContainer__StyledButtonPrimitiveIconContainer-sc-8rx3cv-0 > .Icon__StyledIcon-sc-1det6wr-0'
       ).click({ multiple: true });
-      cy.screenshot();
     });
 
     it("Check origin", () => {
@@ -36,7 +35,8 @@ Cypress._.times(10, () => {
     });
 
     it("Check if Booking option is enabled", () => {
-      cy.get(":checkbox").should("be.enabled");
+      cy.get(":checkbox").uncheck().should("be.checked");
+      cy.wait(3000);
     });
 
     it("Click search", () => {
