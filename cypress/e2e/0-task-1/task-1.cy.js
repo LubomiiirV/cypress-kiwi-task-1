@@ -35,18 +35,19 @@ Cypress._.times(1, () => {
       });
     });
 
-    it("Check if Booking option is enabled", () => {
-      cy.get(":checkbox")
-        .as("checkbox")
-        .invoke("is", ":checked")
-        .then((checked) => {
-          if (checked) {
-            cy.get("@checkbox").should("be.checked");
-          } else {
-            cy.get("@checkbox").check({ force: true });
-          }
-        });
-    });
+    //turned off checkbox test - redirecting to Booking
+    // it("Check if Booking option is enabled", () => {
+    //   cy.get(":checkbox")
+    //     .as("checkbox")
+    //     .invoke("is", ":checked")
+    //     .then((checked) => {
+    //       if (checked) {
+    //         cy.get("@checkbox").should("be.checked");
+    //       } else {
+    //         cy.get("@checkbox").check({ force: true });
+    //       }
+    //     });
+    // });
 
     it("Click search", () => {
       cy.once("uncaught:exception", () => false);
