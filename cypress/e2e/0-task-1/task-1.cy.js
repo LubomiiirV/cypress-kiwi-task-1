@@ -1,9 +1,8 @@
-Cypress._.times(1, () => {
+Cypress._.times(10, () => {
   describe("Test Kiwi web site", () => {
     it("Visit kiwi.com and accept cookies", () => {
       cy.once("uncaught:exception", () => false);
       cy.visit("");
-      cy.clearCookies();
       cy.get(
         '[data-test="ModalCloseButton"] > .ButtonPrimitiveContent__StyledButtonPrimitiveContent-sc-1r81o9a-0 > .ButtonPrimitiveIconContainer__StyledButtonPrimitiveIconContainer-sc-8rx3cv-0 > .Icon__StyledIcon-sc-1det6wr-0'
       ).click({ multiple: true });
@@ -35,19 +34,19 @@ Cypress._.times(1, () => {
       });
     });
 
-    //turned off checkbox test - redirecting to Booking
-    // it("Check if Booking option is enabled", () => {
-    //   cy.get(":checkbox")
-    //     .as("checkbox")
-    //     .invoke("is", ":checked")
-    //     .then((checked) => {
-    //       if (checked) {
-    //         cy.get("@checkbox").should("be.checked");
-    //       } else {
-    //         cy.get("@checkbox").check({ force: true });
-    //       }
-    //     });
-    // });
+    //changed checkbox to uncheck - redirecting to Booking
+    it("Check if Booking option is enabled", () => {
+      cy.get(":checkbox")
+        .as("checkbox")
+        .invoke("is", ":checked")
+        .then((checked) => {
+          if (checked) {
+            cy.get("@checkbox").should("not.be.checked");
+          } else {
+            cy.get("@checkbox").uncheck({ force: true });
+          }
+        });
+    });
 
     it("Click search", () => {
       cy.once("uncaught:exception", () => false);
@@ -63,7 +62,7 @@ Cypress._.times(1, () => {
 
     it("Check if its sorted from lowest price", () => {
       cy.get(
-        '[data-test="1e03125b4b720000b2ce7dc7_0-125b1e034b7b0000409a1658_0"] > .ResultCardstyled__ResultCardActions-sc-vsw8q3-5 > .ResultCardstyled__ResultCardActionsPriceMeta-sc-vsw8q3-6 > .ResultCardstyled__ResultCardActionsPrice-sc-vsw8q3-7 > [data-test="ResultCardPrice"] > .length-4',
+        '[data-test="1e03125b4b6a000021691044_0-125b1e034b7c000065296264_0"] > .ResultCardstyled__ResultCardActions-sc-vsw8q3-5',
         {
           timeout: 5000,
         }
@@ -83,7 +82,7 @@ Cypress._.times(1, () => {
 
     it("Continue to reservation, sign in", () => {
       cy.get(
-        '[data-test="1e03125b4b720000b2ce7dc7_0-125b1e034b780000fdd66b0d_0"] > .ResultCardstyled__ResultCardActions-sc-vsw8q3-5 > .Stack__StyledStack-sc-oaff2v-0 > [data-test="BookingButton"] > [role="none"] > .ButtonPrimitive__StyledButtonPrimitive-sc-1lbd19y-0'
+        '[data-test="1e03125b4b6a000021691044_0-125b1e034b780000fdd66b0d_0"] > .ResultCardstyled__ResultCardActions-sc-vsw8q3-5 > .Stack__StyledStack-sc-oaff2v-0 > [data-test="BookingButton"] > [role="none"] > .ButtonPrimitive__StyledButtonPrimitive-sc-1lbd19y-0'
       ).click({ animationDistanceThreshold: 20 }, { multiple: true });
       cy.get('[data-test="MagicLogin-SignInButton"]').click({ multiple: true });
       cy.get(
