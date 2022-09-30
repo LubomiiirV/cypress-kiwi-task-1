@@ -3,6 +3,7 @@ Cypress._.times(1, () => {
     it("Visit kiwi.com and accept cookies", () => {
       cy.once("uncaught:exception", () => false);
       cy.visit("");
+      cy.clearCookies();
       cy.get(
         '[data-test="ModalCloseButton"] > .ButtonPrimitiveContent__StyledButtonPrimitiveContent-sc-1r81o9a-0 > .ButtonPrimitiveIconContainer__StyledButtonPrimitiveIconContainer-sc-8rx3cv-0 > .Icon__StyledIcon-sc-1det6wr-0'
       ).click({ multiple: true });
@@ -16,7 +17,7 @@ Cypress._.times(1, () => {
       cy.get(
         '[data-test="PlacePickerInput-destination"] > [data-test="SearchField-input"]'
       ).type("Dublin");
-      //cy.wait(3000);
+      cy.wait(3000);
       cy.get(
         '[data-test="PlacePickerRow-city"] > .Stack__StyledStack-sc-oaff2v-0'
       ).click({ multiple: true });
@@ -35,12 +36,24 @@ Cypress._.times(1, () => {
     });
 
     it("Check if Booking option is enabled", () => {
-      cy.get(".Checkbox__LabelText-sc-1xqef2c-3").click({ multiple: true });
-      cy.get(":checkbox").should("be.checked");
+      cy.get(":checkbox")
+        .as("checkbox")
+        .invoke("is", ":checked")
+        .then((checked) => {
+          if (checked) {
+            cy.get("@checkbox").should("be.checked");
+          } else {
+            cy.get("@checkbox").check({ force: true });
+          }
+        });
     });
 
     it("Click search", () => {
-      cy.get('[data-test="LandingSearchButton"]').click({ multiple: true });
+      cy.once("uncaught:exception", () => false);
+      cy.get('[data-test="LandingSearchButton"]').click({
+        multiple: true,
+        force: true,
+      });
     });
 
     it("Sort by lowest price", () => {
