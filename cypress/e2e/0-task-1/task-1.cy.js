@@ -1,4 +1,4 @@
-Cypress._.times(10, () => {
+Cypress._.times(5, () => {
   describe("Test Kiwi web site", () => {
     it("Visit kiwi.com and accept cookies", () => {
       cy.once("uncaught:exception", () => false);
@@ -35,13 +35,13 @@ Cypress._.times(10, () => {
     });
 
     //changed checkbox to uncheck - redirecting to Booking
-    it("Check if Booking option is enabled", () => {
+    it("Checkbox", () => {
       cy.get(":checkbox")
         .as("checkbox")
         .invoke("is", ":checked")
         .then((checked) => {
           if (checked) {
-            cy.get("@checkbox").should("not.be.checked");
+            cy.get("@checkbox").should("be.checked").uncheck({ force: true });
           } else {
             cy.get("@checkbox").uncheck({ force: true });
           }
@@ -57,6 +57,7 @@ Cypress._.times(10, () => {
     });
 
     it("Sort by lowest price", () => {
+      cy.once("uncaught:exception", () => false);
       cy.get('[data-test="SortBy-price"]').click({ multiple: true });
     });
 
